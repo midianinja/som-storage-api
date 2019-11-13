@@ -26,6 +26,11 @@ export const upload = async (event) => {
     const originalResponse = await s3.upload(base64Data, `${key()}.mp3`, 'audio/mp3', undefined);
     return ({
       statusCode: 200,
+      headers: {
+        'Access-Control-Allow-Credentials': true,
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify({
         link: originalResponse.Location,
       }),
@@ -34,6 +39,11 @@ export const upload = async (event) => {
     console.log('Orifinal image error', err);
     return ({
       statusCode: 500,
+      headers: {
+        'Access-Control-Allow-Credentials': true,
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify({
         error: {
           type: 'upload_song_error',

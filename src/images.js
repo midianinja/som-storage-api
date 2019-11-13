@@ -60,6 +60,11 @@ export const upload = async (event) => {
     console.log('Orifinal image error', err);
     return ({
       statusCode: 500,
+      headers: {
+        'Access-Control-Allow-Credentials': true,
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify({
         error: {
           type: 'upload_original_image',
@@ -77,6 +82,11 @@ export const upload = async (event) => {
     console.log('mimified image error', err);
     return ({
       statusCode: 500,
+      headers: {
+        'Access-Control-Allow-Credentials': true,
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify({
         error: {
           type: 'process_mimified_image',
@@ -94,6 +104,11 @@ export const upload = async (event) => {
     console.log('upload image error', err);
     return ({
       statusCode: 500,
+      headers: {
+        'Access-Control-Allow-Credentials': true,
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify({
         error: {
           type: 'process_thumbnail_image',
@@ -106,6 +121,11 @@ export const upload = async (event) => {
   console.log('urls: ', urls);
   return ({
     statusCode: 200,
+    headers: {
+      'Access-Control-Allow-Credentials': true,
+      'Access-Control-Allow-Origin': '*',
+      'Content-Type': 'application/json',
+    },
     body: JSON.stringify({
       urls,
     }),

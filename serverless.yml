@@ -72,21 +72,59 @@ functions:
      - http:
         path: image/upload
         method: POST
-        cors: true
+        cors:
+          origins:
+            - https://*.som.vc
+            - http://192.168.0.12:8080
+            - https://som.vc
+          headers:
+            - Content-Type
+            - Access-Control-Allow-Origin
+            - X-Amz-Date
+            - Authorization
+            - X-Api-Key
+            - X-Amz-Security-Token
+            - X-Amz-User-Agent
+          allowCredentials: false
   uploadSong:
     handler: index.uploadSongFunction
     events:
      - http:
         path: song/upload
         method: POST
-        cors: true
+        cors:
+          origins:
+            - https://*.som.vc
+            - http://192.168.0.12:8080
+            - https://som.vc
+          headers:
+            - Content-Type
+            - Access-Control-Allow-Origin
+            - X-Amz-Date
+            - Authorization
+            - X-Api-Key
+            - X-Amz-Security-Token
+            - X-Amz-User-Agent
+          allowCredentials: false
   uploadDocument:
     handler: index.uploadDocumentFunction
     events:
      - http:
         path: document/upload
         method: POST
-        cors: true
+        cors:
+          origins:
+            - https://*.som.vc
+            - http://192.168.0.12:8080
+          headers:
+            - Content-Type
+            - Access-Control-Allow-Origin
+            - X-Amz-Date
+            - Authorization
+            - X-Api-Key
+            - X-Amz-Security-Token
+            - X-Amz-User-Agent
+          allowCredentials: false
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
