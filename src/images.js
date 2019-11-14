@@ -31,24 +31,42 @@ export const upload = async (event) => {
     originalTmpPath,
     filename,
   );
+  try {
+    await imagemin([filepath], mimifiedTmpPath, {
+      plugins: [
+        imageminJpegRecompress({
+          loops: 4,
+          quality: 'high',
+        }),
+      ],
+    });
 
-  await imagemin([filepath], mimifiedTmpPath, {
-    plugins: [
-      imageminJpegRecompress({
-        loops: 4,
-        quality: 'high',
-      }),
-    ],
-  });
+    await imagemin([filepath], thumbnailTmpPath, {
+      plugins: [
+        imageminJpegRecompress({
+          loops: 4,
+          quality: 'low',
+        }),
+      ],
+    });
 
-  await imagemin([filepath], thumbnailTmpPath, {
-    plugins: [
-      imageminJpegRecompress({
-        loops: 4,
-        quality: 'low',
+  } catch (err) {
+    console.log('Orifinal image error', err);
+    return ({
+      statusCode: 500,
+      headers: {
+        'Access-Control-Allow-Credentials': true,
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        error: {
+          type: 'upload_original_image',
+          info: err,
+        },
       }),
-    ],
-  });
+    });
+  }
 
   const urls = {};
   console.log('urls: ', urls);
