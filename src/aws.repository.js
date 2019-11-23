@@ -12,7 +12,7 @@ const s3 = new AWS.S3({
   * @param {string} contentType it's file content type
   * @returns {promise} with err or file storage data
   */
-const upload = (body, key, contentType = null, Bucket = 'som-dev-storage') => {
+const upload = (body, key, contentType = null, Bucket = 'dev-som-storage') => {
   console.log('Bucket: ', Bucket);
   const params = {
     Body: body,

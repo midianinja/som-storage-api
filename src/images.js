@@ -49,7 +49,6 @@ export const upload = async (event) => {
         }),
       ],
     });
-
   } catch (err) {
     console.log('Orifinal image error', err);
     return ({
