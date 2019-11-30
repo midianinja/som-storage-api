@@ -77,7 +77,7 @@ export const upload = async (event) => {
 
   try {
     const mimifiedBuffer = await fs.readFileSync(`${mimifiedTmpPath + filename}.jpg`);
-    const mimifiedResponse = await s3.upload(mimifiedBuffer, `${key('mimifieds')}.jpg`, 'image/jpeg', undefined);
+    const mimifiedResponse = await s3.upload(mimifiedBuffer, `${key('mimifieds')}.jpg`, 'image/jpeg', stgVariables.BUCKET_NAME);
     urls.mimified = mimifiedResponse.Location;
   } catch (err) {
     console.log('mimified image error', err);
@@ -99,7 +99,7 @@ export const upload = async (event) => {
 
   try {
     const thumbnailBuffer = await fs.readFileSync(`${thumbnailTmpPath + filename}.jpg`);
-    const thumbnailResponse = await s3.upload(thumbnailBuffer, `${key('thumbnails')}.jpg`, 'image/jpeg', undefined);
+    const thumbnailResponse = await s3.upload(thumbnailBuffer, `${key('thumbnails')}.jpg`, 'image/jpeg', stgVariables.BUCKET_NAME);
     urls.thumbnail = thumbnailResponse.Location;
   } catch (err) {
     console.log('upload image error', err);

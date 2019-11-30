@@ -18,10 +18,9 @@ const remove = path => new Promise((resolve, reject) => {
       resolve();
     }
   });
-});undefined
+});
 
 export default ({
   remove,
   read,
 });
-undefined
