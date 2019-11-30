@@ -17,13 +17,14 @@ import s3 from './aws.repository';
   */
 export const upload = async (event) => {
   const { file, id, fileName } = JSON.parse(event.body);
+  const stgVariables = event.stageVariables || {};
   const filename = fileName || `${new Date().getTime()}.pdf`;
   const data = file.replace(/^data:application\/pdf+;base64,/, '');
   const key = () => `documents/${id}/pdf/${filename}`;
 
   try {
     const base64Data = Buffer.from(data, 'base64');
-    const documentResponse = await s3.upload(base64Data, `${key()}.mp3`, 'application/pdf', undefined);
+    const documentResponse = await s3.upload(base64Data, `${key()}.mp3`, 'application/pdf', stgVariables.BUCKET_NAME);
     return ({
       statusCode: 200,
       body: JSON.stringify({

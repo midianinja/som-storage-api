@@ -17,13 +17,14 @@ import s3 from './aws.repository';
   */
 export const upload = async (event) => {
   const { file, id } = JSON.parse(event.body);
+  const stgVariables = event.stageVariables || {};
   const filename = `${new Date().getTime()}`;
   const data = file.replace(/^data:audio\/mp3+;base64,/, '');
   const key = () => `songs/${id}/mp3/${filename}`;
 
   try {
     const base64Data = Buffer.from(data, 'base64');
-    const originalResponse = await s3.upload(base64Data, `${key()}.mp3`, 'audio/mp3', undefined);
+    const originalResponse = await s3.upload(base64Data, `${key()}.mp3`, 'audio/mp3', stgVariables.BUCKET_NAME);
     return ({
       statusCode: 200,
       headers: {
@@ -98,6 +99,6 @@ export const remove = (event) => {
 //   const key = `image/${id}/${info.ext}/${fileId}.${info.ext}`;
 
 //   const result =
-// await s3.upload(fileData, key, info.contentType, event.stageVariables.bucketName);
+// await s3.upload(fileData, key, info.contentType, event.stagestgVariables.bucketName);
 //   fileSystem.delete(filePath);
 // }

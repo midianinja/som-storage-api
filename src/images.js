@@ -18,6 +18,7 @@ import s3 from './aws.repository';
 export const upload = async (event) => {
   const { file, id } = JSON.parse(event.body);
   const filename = `${new Date().getTime()}`;
+  const stgVariables = event.stageVariables || {};
   const data = file.replace(/^data:image\/\w+;base64,/, '');
   const base64Data = Buffer.from(data, 'base64');
   const rootDir = '/tmp';
@@ -54,7 +55,7 @@ export const upload = async (event) => {
   console.log('urls: ', urls);
 
   try {
-    const originalResponse = await s3.upload(base64Data, `${key('originals')}.jpg`, 'image/jpeg', undefined);
+    const originalResponse = await s3.upload(base64Data, `${key('originals')}.jpg`, 'image/jpeg', stgVariables.BUCKET_NAME);
     urls.original = originalResponse.Location;
   } catch (err) {
     console.log('Orifinal image error', err);
