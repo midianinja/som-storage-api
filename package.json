@@ -22,7 +22,7 @@
     "imagemin-jpeg-recompress": "^6.0.0",
     "imagemin-pngquant": "^7.0.0",
     "multiparty": "^4.2.1",
-    "validator": "^10.11.0"
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.0",
